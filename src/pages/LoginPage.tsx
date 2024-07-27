@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { login } from "@/http/api";
 import { useMutation } from "@tanstack/react-query";
+import { LoaderCircle } from "lucide-react";
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -63,8 +64,13 @@ const LoginPage = () => {
             <Label htmlFor="password">Password</Label>
             <Input id="password" ref={passwordRef} type="password" required />
           </div>
-          <Button onClick={handleLoginSubmit} className="w-full">
-            Sign in
+          <Button
+            onClick={handleLoginSubmit}
+            className="w-full"
+            disabled={mutation.isPending}
+          >
+            {mutation.isPending && <LoaderCircle className="animate-spin" />}
+            <span className="ml-2">Sign in</span>
           </Button>
           <div className="mt-2 text-center text-sm">
             Don't have an account?{" "}
