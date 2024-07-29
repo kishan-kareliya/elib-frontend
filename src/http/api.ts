@@ -20,4 +20,21 @@ const login = async (data: { email: string; password: string }) => {
   }
 };
 
-export { login };
+const register = async (data: {
+  name: string;
+  email: string;
+  password: string;
+}) => {
+  try {
+    const response = await api.post("api/users/register", data);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      const customMessage = error.response.data.message || "An error occurred";
+      throw new Error(customMessage);
+    }
+    throw new Error("An unknown error occurred");
+  }
+};
+
+export { login, register };
