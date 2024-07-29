@@ -26,6 +26,13 @@ const LoginPage = () => {
       navigate("/dashboard/home");
       console.log("login successful");
     },
+    onError: (error) => {
+      let errorMessage = "";
+      if (error) {
+        errorMessage = error.message;
+      }
+      console.log(errorMessage);
+    },
   });
 
   const handleLoginSubmit = () => {
@@ -64,6 +71,9 @@ const LoginPage = () => {
             <Label htmlFor="password">Password</Label>
             <Input id="password" ref={passwordRef} type="password" required />
           </div>
+          {mutation.isError && (
+            <div className="text-red-500">{mutation.error.message}</div>
+          )}
           <Button
             onClick={handleLoginSubmit}
             className="w-full"
