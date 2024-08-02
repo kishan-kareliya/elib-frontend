@@ -22,7 +22,9 @@ const RegisterPage = () => {
 
   const mutation = useMutation({
     mutationFn: register,
-    onSuccess: () => {
+    onSuccess: (data) => {
+      //setup token on localstorage
+      localStorage.setItem("token", data.accessToken);
       navigate("/dashboard/home");
       console.log("Registration successful");
     },
