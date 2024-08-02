@@ -37,4 +37,17 @@ const register = async (data: {
   }
 };
 
-export { login, register };
+const getBooks = async () => {
+  try {
+    const response = await api.get("/api/books/");
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.message) {
+      const customMessage = error.response?.data.message || "An error occurred";
+      throw new Error(customMessage);
+    }
+    throw new Error("An unknown error occurred");
+  }
+};
+
+export { login, register, getBooks };
