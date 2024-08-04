@@ -1,30 +1,24 @@
-# React + TypeScript + Vite
+# elib Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+elib Frontend is a dashboard application for managing books, built using React.js. It features JWT-based authentication, role-based access control, and a modern UI powered by Shadcn UI. The application uses React Router for client-side routing, React Query for data fetching and caching, and React Hook Form for form management.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **JWT Authentication**: Secure login and protected routes.
+- **Routing**: Client-side routing using React Router.
+- **UI Components**: Built with Shadcn UI for a modern look and feel.
+- **TypeScript**: Strongly typed codebase for better maintainability.
+- **Data Fetching**: Efficient data fetching with React Query.
+- **Caching**: Optimized performance with data caching using React Query.
+- **Form Handling**: Robust form handling with React Hook Form.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- **React.js**: JavaScript library for building user interfaces.
+- **TypeScript**: Typed superset of JavaScript.
+- **React Router DOM**: Declarative routing for React.
+- **React Query**: Data-fetching library for React.
+- **React Hook Form**: Form management library.
+- **Shadcn UI**: Component library for React.
+- **JWT**: JSON Web Tokens for authentication.
+- **Zod**: Schema declaration and validation.
