@@ -10,6 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Toaster } from "@/components/ui/toaster";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const DashboardLayout = () => {
@@ -126,6 +127,7 @@ const DashboardLayout = () => {
           <Outlet />
         </main>
       </div>
+      <Toaster />
     </div>
   );
 };
