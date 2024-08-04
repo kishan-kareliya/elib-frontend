@@ -1,5 +1,5 @@
-import { getBooks } from "@/http/api";
-import { useQuery } from "@tanstack/react-query";
+import { deleteBook, getBooks } from "@/http/api";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { File, MoreHorizontal, PlusCircle, LoaderCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -40,6 +40,7 @@ import { useNavigate } from "react-router-dom";
 
 const BooksPage = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["books"],
@@ -47,11 +48,23 @@ const BooksPage = () => {
     staleTime: 10000,
   });
 
+  const mutation = useMutation({
+    mutationFn: deleteBook,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["books"] });
+      console.log("Book deleted successfully!");
+    },
+  });
+
+  const handleDelete = (id: string) => {
+    mutation.mutate(id);
+  };
+
   const redirectCreateBook = () => {
     navigate("/dashboard/books/create");
   };
 
-  if (isLoading) {
+  if (isLoading || mutation.isPending) {
     return (
       <div className="h-screen w-full flex justify-center items-center">
         <LoaderCircle className="animate-spin" />
@@ -175,7 +188,11 @@ const BooksPage = () => {
                             <DropdownMenuContent align="end">
                               <DropdownMenuLabel>Actions</DropdownMenuLabel>
                               <DropdownMenuItem>Edit</DropdownMenuItem>
-                              <DropdownMenuItem>Delete</DropdownMenuItem>
+                              <DropdownMenuItem
+                                onClick={() => handleDelete(book._id)}
+                              >
+                                Delete
+                              </DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
                         </TableCell>
