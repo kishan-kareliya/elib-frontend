@@ -29,7 +29,7 @@ import {
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createBook } from "@/http/api";
 
 const formSchema = z.object({
@@ -52,6 +52,7 @@ const formSchema = z.object({
 
 const CreateBook = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -67,8 +68,9 @@ const CreateBook = () => {
   const mutation = useMutation({
     mutationFn: createBook,
     onSuccess: () => {
-      navigate("/dashboard/books");
+      queryClient.invalidateQueries({ queryKey: ["books"] });
       console.log("book created successfully!");
+      navigate("/dashboard/books");
     },
   });
 
