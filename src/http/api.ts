@@ -50,4 +50,22 @@ const getBooks = async () => {
   }
 };
 
-export { login, register, getBooks };
+const createBook = async (data: FormData) => {
+  try {
+    const response = await api.post("/api/books/", data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: localStorage.getItem("token"),
+      },
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.message) {
+      const customMessage = error.response?.data.message || "An error occurred";
+      throw new Error(customMessage);
+    }
+    throw new Error("An unknown error occurred");
+  }
+};
+
+export { login, register, getBooks, createBook };

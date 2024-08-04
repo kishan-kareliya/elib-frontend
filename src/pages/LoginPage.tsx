@@ -22,8 +22,10 @@ const LoginPage = () => {
   const mutation = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
+      //remove old token
+      localStorage.removeItem("token");
       //setup token on localstorage
-      localStorage.setItem("token", data.accessToken);
+      localStorage.setItem("token", "Bearer " + data.accessToken);
 
       //redirect to dashboard
       navigate("/dashboard/home");

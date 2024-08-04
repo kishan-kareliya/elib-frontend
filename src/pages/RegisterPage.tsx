@@ -23,8 +23,10 @@ const RegisterPage = () => {
   const mutation = useMutation({
     mutationFn: register,
     onSuccess: (data) => {
+      //remove old token
+      localStorage.removeItem("token");
       //setup token on localstorage
-      localStorage.setItem("token", data.accessToken);
+      localStorage.setItem("token", "Bearer " + data.accessToken);
       navigate("/dashboard/home");
       console.log("Registration successful");
     },
